@@ -8,7 +8,7 @@ import AddCategoryModal from './addCategoryModal';
 import AddBookModal from './addBookModal';
 import AddAuthorModal from './addAuthorModal';
 import { useNavigate } from 'react-router'
-const URLServer = "http://localhost:3000";
+const URLServer = "https://goodread-backend.herokuapp.com";
 
 function ThreeTabs() {
   // defining the states for the data 
