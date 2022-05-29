@@ -186,7 +186,7 @@ const SignUpForm = (props) => {
                     setPwd('');
                     setMatchPwd('');
                     setImg('');
-                    navigate('/admin')
+                    switchToSignIn()
                 }).catch((error) => {
                     if (!error?.response) {
                         setErrMsg('No Server Response');
