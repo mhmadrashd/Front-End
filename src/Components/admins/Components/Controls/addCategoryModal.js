@@ -25,7 +25,7 @@ function AddCategoryModal(probs) {
         })
         .then(function (response) {
           probs.onClick()
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(function (error) {
           console.log(error);

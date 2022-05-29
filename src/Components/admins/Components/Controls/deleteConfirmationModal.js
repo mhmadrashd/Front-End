@@ -17,7 +17,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
-                    window.location.reload();
+                    // window.location.reload();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -32,7 +32,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
-                    window.location.reload();
+                    // window.location.reload();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -47,7 +47,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
-                    window.location.reload();
+                    // window.location.reload();
                 })
                 .catch(function (error) {
                     console.log(error);

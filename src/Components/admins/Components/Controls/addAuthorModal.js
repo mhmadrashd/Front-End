@@ -48,7 +48,7 @@ function AddAuthorModal(probs) {
           })
             .then((response) => {
               probs.onClick();
-              window.location.reload()
+              // window.location.reload()
             }).catch((error) => {
               console.log(error);
             })
