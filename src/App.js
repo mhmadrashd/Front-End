@@ -3,7 +3,7 @@ import "./index.css";
 import Home from "./Home/Home";
 import SignUp from './Components/UserForms/SignUp'
 import { BrowserRouter } from "react-router-dom";
-import { Navigate, Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from "./Components/dashboard/Dashboard";
