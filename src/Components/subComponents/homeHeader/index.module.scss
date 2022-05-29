@@ -6,6 +6,15 @@
     overflow: hidden;
     justify-content: center;
     justify-items: center;
+    @media screen and (max-width: 992px){
+        height: 50vh;
+    }
+    @media screen and (max-width:786px){
+        height: 55vh;
+    }
+    @media screen and (max-width:480px){
+        height: 40vh;
+    }
 }
 .vd{
     width: 100%;
@@ -26,11 +35,14 @@
     padding: 0px 10px;
     border-radius: 20px;
     max-width: 80%;
+    @media screen and (max-width: 992px){
+        top: 45%;
+    }
     @media screen and (max-width:786px){
-        top: 28%;
+        top: 45%;
     }
     @media screen and (max-width:480px){
-        top: 8%;
+        top: 40%;
     }
     .maintxt{
         color: rgba(237, 202, 18,.9);
