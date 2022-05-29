@@ -58,7 +58,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{2,19}$/;
 const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 const PWD_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 const IMG_REGEX = /\.(jpg|jpeg|png|gif)$/;
-const REGISTER_URL = 'http://localhost:3000';
+const REGISTER_URL = 'https://goodread-backend.herokuapp.com';
 
 const SignUpForm = (props) => {
 

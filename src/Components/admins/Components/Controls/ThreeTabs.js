@@ -10,7 +10,7 @@ import AddAuthorModal from './addAuthorModal';
 import { useNavigate } from 'react-router'
 import { setloginState } from '../../../../Redux/DataSlice';
 import { useDispatch } from 'react-redux';
-const URLServer = "http://localhost:3000";
+const URLServer = "https://goodread-backend.herokuapp.com";
 
 function ThreeTabs() {
   // defining the states for the data 

@@ -7,7 +7,7 @@ import './Author.css'
 import { Box } from '@mui/material';
 import Image from './Images/LibararyBG.jpg'
 import axios from 'axios';
-const LOCALHOST = 'http://localhost:3000/';
+const LOCALHOST = 'https://goodread-backend.herokuapp.com/';
 
 export default function Author() {
   const { id } = useParams();

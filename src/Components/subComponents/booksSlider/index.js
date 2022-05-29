@@ -20,7 +20,7 @@ const BooksSlider = () => {
   };
   const refresh = 0;
   useLayoutEffect(() => {
-    axios.get('http://localhost:3000/book/', {
+    axios.get('https://goodread-backend.herokuapp.com/book/', {
       headers: {
         token: sessionStorage.getItem("Authorization")
       }

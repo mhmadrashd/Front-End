@@ -17,7 +17,7 @@ const Login = (props) => {
   async function submit(values) {
     try {
 
-      await axios.post(`http://localhost:3000/admin/login`, values, {
+      await axios.post(`https://goodread-backend.herokuapp.com/admin/login`, values, {
         headers: {
           token: sessionStorage.getItem("Authorization")
         }

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const AuthFetch = {
   login: (user) => {
-    return axios.post("http://localhost:3000/admin/login", user, {
+    return axios.post("https://goodread-backend.herokuapp.com/admin/login", user, {
       headers: {
         token: sessionStorage.getItem("Authorization")
       }
