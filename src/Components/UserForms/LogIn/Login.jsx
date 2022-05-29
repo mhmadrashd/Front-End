@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import './Login.css'
 
-const LOGIN_URL = `https://goodread-backend.herokuapp.com`;
+const LOGIN_URL = `http://localhost:3000`;
 
 const Login = () => {
 
@@ -24,19 +24,20 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post(`${LOGIN_URL}/user/login`,
-            JSON.stringify({ email, password }),
-            {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true,
+        await axios.post(`${LOGIN_URL}/user/login`, { email, password }, {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
             }
-        ).then((response) => {
+        }).then((response) => {
             dispatch(setloginState(true));
             sessionStorage.setItem("loginState", true)
+            // console.log(response)
+            sessionStorage.setItem("Authorization", response.data.Authorization);
             dispatch(setUserData(response.data));
             navigate("/");
             setEmail('');
             setPassword('');
+            console.log(sessionStorage.getItem("Authorization"))
         }).catch((error) => {
             setErrMsg(error.response?.data.message);
             errRef.current.focus();

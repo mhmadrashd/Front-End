@@ -12,7 +12,7 @@ const BooksSlider = () => {
     if (direction === "left") {
       setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
     } else {
-      setSlideIndex(slideIndex < BooksData.length ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex < BooksData.length - 1 ? slideIndex + 1 : 0);
     }
   };
   const wrapper = {
@@ -20,10 +20,14 @@ const BooksSlider = () => {
   };
   const refresh = 0;
   useLayoutEffect(() => {
-    axios.get('https://goodread-backend.herokuapp.com/book/', { withCredentials: true, credentials: 'include' })
+    axios.get('http://localhost:3000/book/', {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then((response) => {
         setBooksData(...BooksData, response.data);
-        console.log(response.data)
+        // console.log(response.data)
       })
       .catch((error) => {
         console.log(error)

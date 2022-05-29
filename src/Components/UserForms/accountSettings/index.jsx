@@ -64,13 +64,17 @@ export default function AccountSettings() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await uploadFile();
-        axios.patch(`https://goodread-backend.herokuapp.com/user`, {
+        axios.patch(`http://localhost:3000/user`, {
             fName: fname,
             lName: lname,
             email: eml,
             password: pwd,
             img: imageUrl
-        }, { withCredentials: true, credentials: 'include' })
+        }, {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
+            }
+        })
             .then((response) => {
                 dispatch(setOpenDialog(true))
                 setUpdateState(1)
@@ -83,7 +87,11 @@ export default function AccountSettings() {
 
     const refresh = 0;
     React.useEffect(() => {
-        axios.get(`https://goodread-backend.herokuapp.com/user`, { withCredentials: true, credentials: 'include' })
+        axios.get(`http://localhost:3000/user`, {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
+            }
+        })
             .then((response) => {
                 setFname(response.data.fName);
                 setLname(response.data.lName);

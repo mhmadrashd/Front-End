@@ -6,7 +6,8 @@ import StarRating from './Rating'
 import './Author.css'
 import { Box } from '@mui/material';
 import Image from './Images/LibararyBG.jpg'
-const LOCALHOST = 'https://goodread-backend.herokuapp.com/';
+import axios from 'axios';
+const LOCALHOST = 'http://localhost:3000/';
 
 export default function Author() {
   const { id } = useParams();
@@ -22,27 +23,31 @@ export default function Author() {
     Books: []
   });
   useEffect(() => {
-    fetch(`${LOCALHOST}author/` + id)
-      .then(response => response.json())
-      // 4. Setting *dogImage* to the image url that we received from the response above
-      .then(data =>
+    axios.get(`${LOCALHOST}author/` + id, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
+      .then(response =>
         setAuthorInfo({
-          ID: data._id,
-          fname: data.fName,
-          lname: data.lName,
-          dob: data.DOB,
-          info: data.info,
-          image: data.img,
+          ID: response.data._id,
+          fname: response.data.fName,
+          lname: response.data.lName,
+          dob: response.data.DOB,
+          info: response.data.info,
+          image: response.data.img,
         })
       )
   }, [])
   useEffect(() => {
-    fetch(`${LOCALHOST}book/authBook/` + id)
-      .then(response => response.json())
-      // 4. Setting *dogImage* to the image url that we received from the response above
-      .then(data => {
+    axios.get(`${LOCALHOST}book/authBook/` + id, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
+      .then(response => {
         setAuthorBook({
-          Books: data
+          Books: response.data
         })
       }
       )
@@ -51,7 +56,8 @@ export default function Author() {
   var list = AuthorBook.Books.map((data) => {
 
     return (
-      <div class="booksofauthor"><img alt="" class=" bookimg" src={data.img} width="70px" height="70px"></img>
+      <div class="booksofauthor">
+        <img alt="" class=" bookimg" src={data.img} width="100px" height="100px" />
         <div class="selectandrating">
           <div><StarRating stars={data.rating} /></div>
         </div>
@@ -67,6 +73,7 @@ export default function Author() {
       </div>)
   })
   return (
+
     <Box sx={{
       width: "100%", margin: 0,
       overflow: "hidden",
@@ -103,7 +110,7 @@ export default function Author() {
           <>{list}</>
         </div>
       </div>
-
+      {window.scrollTo(0, 0)}
     </Box>
   );
 

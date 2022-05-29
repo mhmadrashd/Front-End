@@ -11,7 +11,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { setloginState, setOpenDialog } from '../Redux/DataSlice';
-import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -96,6 +95,6 @@ export const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch();
     // dispatch(setloginState(true));
     const { loginState } = useSelector((state) => state.DataReducer);
-    console.log(loginState)
+    // console.log(loginState)
     return loginState ? children : <Navigate to="/" />;
 }

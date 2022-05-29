@@ -55,7 +55,11 @@ const CategoriesSlider = () => {
   const refresh = 0;
   const navigate = useNavigate();
   useLayoutEffect(() => {
-    axios.get('https://goodread-backend.herokuapp.com/category/', { withCredentials: true, credentials: 'include' })
+    axios.get('http://localhost:3000/category/', {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then((response) => {
         setCategoryData(...CategoryData, response.data);
       })

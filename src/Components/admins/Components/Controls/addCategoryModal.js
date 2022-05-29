@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import { useFormik } from 'formik';
 import axios from 'axios';
-const URLServer = "https://goodread-backend.herokuapp.com";
+const URLServer = "http://localhost:3000";
 
 function AddCategoryModal(probs) {
 
@@ -17,9 +17,12 @@ function AddCategoryModal(probs) {
   //to handle the submit action with formik
   const onSubmit = (values) => {
     try {
-      axios.post(`${URLServer}/category`, {
-        Name: values.Name,
-      }, { withCredentials: true, credentials: 'include' })
+      axios.post(`${URLServer}/category`, { Name: values.Name, },
+        {
+          headers: {
+            token: sessionStorage.getItem("Authorization")
+          }
+        })
         .then(function (response) {
           probs.onClick()
           window.location.reload();

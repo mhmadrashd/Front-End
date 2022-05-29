@@ -16,7 +16,7 @@ import { InputLabel } from '@mui/material';
 import axios from 'axios'
 import { useSelector } from 'react-redux';
 
-const URL = "https://goodread-backend.herokuapp.com/book/userBook/";
+const URL = "http://localhost:3000/book/userBook/";
 
 
 const columns = [
@@ -85,7 +85,11 @@ export default function StickyHeadTable(props) {
     };
     const refresh = 0;
     useLayoutEffect(() => {
-        axios.get(URL + localStorage.getItem("id"), { withCredentials: true, credentials: 'include' })
+        axios.get(URL + localStorage.getItem("id"), {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
+            }
+        })
             .then((response) => {
                 setUserBooks(response.data);
                 let BooksData = response.data.map((bk) => {
@@ -112,14 +116,22 @@ export default function StickyHeadTable(props) {
 
     const handleChange = async (event) => {
         rows.state = event.target.value;
-        await axios.patch(`${URL}state/` + event.target.name, { state: rows.state })
+        await axios.patch(`${URL}state/` + event.target.name, { state: rows.state }, {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
+            }
+        })
         // .then((result) => console.log(result))
         setshelves(event.target.value);
     };
 
     const HandlingRating = async (event) => {
         rows.rating = event.target.value;
-        await axios.patch(`${URL}rating/` + event.target.name, { rating: rows.rating })
+        await axios.patch(`${URL}rating/` + event.target.name, { rating: rows.rating }, {
+            headers: {
+                token: sessionStorage.getItem("Authorization")
+            }
+        })
             .then((result) => console.log(result))
     };
 

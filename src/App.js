@@ -25,22 +25,24 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/home" element={<Home />} />
-                {!loginState ?
-                    <Route path="/login" element={<SignUp />} /> :
-                    <Route path="/home" element={<Home />} />
-                }
-                {!loginState ?
-                    <Route path="/admin" element={<Login />} /> :
-                    <Route path="/home" element={<Home />} />
-                }
+                <Route path="/" element={<Home />} />
+                <Route path="/front-end" element={<Home />} />
 
                 <Route path="/admin/dashboard" element={<PrivateRoute><ThreeTabs /></PrivateRoute>} />
                 <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                 <Route path="/book/:id" element={<PrivateRoute><BookPage /></PrivateRoute>} />
                 <Route path="/author/:id" element={<PrivateRoute><AuthorPage /></PrivateRoute>} />
                 <Route path="/profile/:id" element={<PrivateRoute><AccSettings /></PrivateRoute>} />
+                {!loginState ?
+                    <Route path="/login" element={<SignUp />} /> :
+                    <Route path="/home" element={<Home />} />
+                }
+                {!loginState ?
+                    <Route path="/admin" element={<Login />} /> :
+                    <Route path="/admin/dashboard" element={<PrivateRoute><ThreeTabs /></PrivateRoute>} />
+                }
 
-                <Route path="/*" element={<Navigate to="/home" />} />
+                {/*<Route path="/*" element={<Navigate to="/home" />} />*/}
             </Routes>
         </BrowserRouter>
     )

@@ -9,7 +9,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../firbase/firebase";
 import { v4 } from "uuid";
 import axios from 'axios';
-const URLServer = "https://goodread-backend.herokuapp.com";
+const URLServer = "http://localhost:3000";
 
 
 function EditAuthorModal(probs) {
@@ -55,7 +55,11 @@ function EditAuthorModal(probs) {
             DOB: values.DOB,
             info: values.info,
             img: url
-          }, { withCredentials: true, credentials: 'include' })
+          }, {
+            headers: {
+              token: sessionStorage.getItem("Authorization")
+            }
+          })
             .then((response) => {
               probs.onClick();
               window.location.reload()

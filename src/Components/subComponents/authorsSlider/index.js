@@ -8,7 +8,7 @@ import { grey, red } from '@mui/material/colors';
 import { useSelector } from "react-redux";
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { useNavigate } from "react-router";
-const URL = "https://goodread-backend.herokuapp.com";
+const URL = "http://localhost:3000";
 
 const responsive = {
   superLargeDesktop: {
@@ -48,7 +48,11 @@ const AuthorsSlider = () => {
   const [CategoryData, setCategoryData] = useState([]);
   const refresh = 0;
   useLayoutEffect(() => {
-    axios.get(`${URL}/author/`, { withCredentials: true, credentials: 'include' })
+    axios.get(`${URL}/author/`, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then((response) => {
         setCategoryData(...CategoryData, response.data);
       })

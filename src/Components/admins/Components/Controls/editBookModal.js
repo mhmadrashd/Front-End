@@ -10,7 +10,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../firbase/firebase";
 import { v4 } from "uuid";
 import axios from 'axios';
-const URLServer = "https://goodread-backend.herokuapp.com";
+const URLServer = "http://localhost:3000";
 
 
 function EditBookModal(probs) {
@@ -51,7 +51,11 @@ function EditBookModal(probs) {
             auhtor: (probs.authorData.filter(author => `${author.fName} ${author.lName}` === values.auhtor))[0]["_id"],
             description: values.description,
             img: url
-          }, { withCredentials: true, credentials: 'include' })
+          }, {
+            headers: {
+              token: sessionStorage.getItem("Authorization")
+            }
+          })
             .then((response) => {
               probs.onClick();
               window.location.reload()

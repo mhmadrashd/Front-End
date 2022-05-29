@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import { useFormik } from 'formik';
 import axios from 'axios';
-const URLServer = "https://goodread-backend.herokuapp.com";
+const URLServer = "http://localhost:3000";
 
 function EditCategoryModal(probs) {
   // console.log(probs.item);
@@ -18,7 +18,11 @@ function EditCategoryModal(probs) {
     // console.log(values);
     axios.patch(`${URLServer}/category/${probs.item._id}`, {
       Name: values.editedCategory,
-    }, { withCredentials: true, credentials: 'include' })
+    }, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then(function (response) {
         probs.onClick()
         window.location.reload();

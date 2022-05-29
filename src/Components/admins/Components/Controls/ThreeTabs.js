@@ -8,7 +8,9 @@ import AddCategoryModal from './addCategoryModal';
 import AddBookModal from './addBookModal';
 import AddAuthorModal from './addAuthorModal';
 import { useNavigate } from 'react-router'
-const URLServer = "https://goodread-backend.herokuapp.com";
+import { setloginState } from '../../../../Redux/DataSlice';
+import { useDispatch } from 'react-redux';
+const URLServer = "http://localhost:3000";
 
 function ThreeTabs() {
   // defining the states for the data 
@@ -46,21 +48,33 @@ function ThreeTabs() {
 
   // get request of the data from categories collection and set its state
   useLayoutEffect(() => {
-    axios.get(`${URLServer}/category`, { withCredentials: true, credentials: 'include' })
+    axios.get(`${URLServer}/category`, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then(response => setCategoriesData(response.data))
       .catch(err => console.log(err))
   }, [])
 
   // get request of the data from books collection and set its state
   useLayoutEffect(() => {
-    axios.get(`${URLServer}/book`, { withCredentials: true, credentials: 'include' })
+    axios.get(`${URLServer}/book`, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then(response => setBooksData(response.data))
       .catch(err => console.log(err))
   }, [])
 
   // get request of the data from authors collection and set its state
   useLayoutEffect(() => {
-    axios.get(`${URLServer}/author`, { withCredentials: true, credentials: 'include' })
+    axios.get(`${URLServer}/author`, {
+      headers: {
+        token: sessionStorage.getItem("Authorization")
+      }
+    })
       .then(response => setAuthorsData(response.data))
       .catch(err => console.log(err))
   }, [])
@@ -81,11 +95,12 @@ function ThreeTabs() {
   const authorModalClose = () => setAuthorModal(false);
   const authorModalShow = () => setAuthorModal(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const logout = () => {
-
-    navigate("/home");
+    dispatch(setloginState(false));
+    sessionStorage.clear()
     document.cookie = "Authorization=deleted;max-age=0"
-    sessionStorage.setItem("loginState", false);
+    navigate("/home");
   }
 
   return (

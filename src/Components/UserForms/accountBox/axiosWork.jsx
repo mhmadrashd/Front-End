@@ -2,5 +2,9 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'https://goodread-backend.herokuapp.com'
+    baseURL: 'http://localhost:3000'
+}, {
+    headers: {
+        token: sessionStorage.getItem("Authorization")
+    }
 });
