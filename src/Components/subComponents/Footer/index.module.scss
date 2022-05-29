@@ -90,6 +90,11 @@
                 margin-bottom: 20px;
                 display: flex;
                 align-items: center;
+                a {
+                    text-decoration: none;
+                    font-size: medium;
+                    color: inherit;
+                }
             }
         }
     }
@@ -109,6 +114,7 @@
             color: green;
             font-weight: bold;
             text-decoration: none;
+            color: inherit;
         }
     }
 }

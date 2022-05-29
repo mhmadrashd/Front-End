@@ -92,9 +92,12 @@ export default function MsgDialogs(props) {
 }
 
 export const PrivateRoute = ({ children }) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // dispatch(setloginState(true));
     const { loginState } = useSelector((state) => state.DataReducer);
     // console.log(loginState)
     return loginState ? children : <Navigate to="/" />;
+}
+export const PrivateRoute2 = ({ children }) => {
+    return <Navigate to="/front-end" />;
 }

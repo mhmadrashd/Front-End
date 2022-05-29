@@ -72,7 +72,10 @@ const AuthorsSlider = () => {
             sx={{ maxWidth: 345 }}
             data-aos="fade-down-left"
             data-aos-offset="150"
-            data-aos-duration="1000"
+            variant="outlined"
+            data-aos-easing="linear"
+            data-aos-duration="700"
+            data-aos-delay={100 * (index * 2)}
           >
             <CardHeader
               avatar={
