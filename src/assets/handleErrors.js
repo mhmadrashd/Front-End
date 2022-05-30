@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -10,10 +10,16 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
-import { setloginState, setOpenDialog } from '../Redux/DataSlice';
+import { setOpenDialog, setOpenSearchDialog } from '../Redux/DataSlice';
 import { Navigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
+import SearchBar from '../Components/subComponents/search/SearchBar';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -81,6 +87,69 @@ export default function MsgDialogs(props) {
                         <ErrorIcon sx={{ color: "red", fontSize: "30px" }} />}
                     {props.msg}
                 </Typography>
+            </DialogContent>
+            <DialogActions>
+                <Button autoFocus onClick={handleClose}>
+                    Close
+                </Button>
+            </DialogActions>
+        </BootstrapDialog>
+    );
+}
+export function SearchDialog() {
+    const [value, setValue] = React.useState('Books');
+    /*
+      * BooksData
+      * CategoriesData
+      * AuthorsData
+      */
+    const [data, setData] = useState(sessionStorage.getItem("BooksData"));
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+
+        event.target.value === "Books" ? setData(JSON.parse(sessionStorage.getItem("BooksData"))) :
+            event.target.value === "Categories" ? setData(JSON.parse(sessionStorage.getItem("CategoriesData"))) :
+                setData(JSON.parse(sessionStorage.getItem("AuthorsData")));
+
+        // console.log(JSON.parse(sessionStorage.getItem("BooksData")))
+        // console.log(JSON.parse(sessionStorage.getItem("CategoriesData")))
+        // console.log(JSON.parse(sessionStorage.getItem("AuthorsData")))
+    };
+    const [open, setOpen] = React.useState(true);
+    const dispatch = useDispatch();
+
+    const handleClose = () => {
+        setOpen(false);
+        dispatch(setOpenSearchDialog(false));
+    };
+
+    return (
+
+        <BootstrapDialog
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+        >
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                {"Search"}
+            </BootstrapDialogTitle>
+            <DialogContent dividers>
+                <FormControl>
+                    <FormLabel id="demo-row-radio-buttons-group-label">Search In</FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        value={value}
+                        onChange={handleChange}
+                    >
+                        <FormControlLabel value="Books" control={<Radio />} label="Books" />
+                        <FormControlLabel disabled value="Categories" control={<Radio />} label="Categories" />
+                        <FormControlLabel value="Authors" control={<Radio />} label="Authors" />
+                    </RadioGroup>
+                </FormControl>
+                <SearchBar data={data} type={value} action={handleClose} />
             </DialogContent>
             <DialogActions>
                 <Button autoFocus onClick={handleClose}>

@@ -111,7 +111,7 @@ function ThreeTabs() {
   const logout = () => {
     dispatch(setloginState(false));
     sessionStorage.clear()
-    document.cookie = "Authorization=deleted;max-age=0"
+    // document.cookie = "Authorization=deleted;max-age=0"
     navigate("/home");
   }
 

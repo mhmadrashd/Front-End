@@ -8,10 +8,6 @@ import { Box, Rating, TextField } from '@mui/material';
 import Image from './Images/LibararyBG.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenDialog } from "../../../../Redux/DataSlice";
@@ -89,7 +85,7 @@ export default function Book() {
         token: sessionStorage.getItem("Authorization")
       }
     })
-      .then(response =>
+      .then(response => {
         setBookInfo({
           bookID: response.data._id,
           bookName: response.data.title,
@@ -101,6 +97,7 @@ export default function Book() {
           image: response.data.img,
           stars: 4
         })
+      }
       )
     setRefresh(0);
   }, [refresh])
@@ -113,7 +110,7 @@ export default function Book() {
       .then(response => {
         setReviewInfo({
           review: response.data
-        })
+        });
         setRefresh(0);
       }
       )
@@ -174,13 +171,15 @@ export default function Book() {
   }
 
   var list = ReviewInfo.review.map((data, index) => {
+    console.log(ReviewInfo.review)
     if (data.review === "") return;
+    if (data.user === null) return;
     return (
       <div className="booksofauthor" key={index}>
         <img
-          className=" bookimg"
+          className="bookimg"
           alt=""
-          src="https://www.clipartmax.com/png/middle/72-722180_these-are-some-cats-avatar-i-drew-during-my-free-time-black.png"
+          src={data.user.img}
           width="70px"
           height="70px" />
 
@@ -190,7 +189,7 @@ export default function Book() {
           </div>
         </div>
         <div className="rating">
-          <h6>{data.user.fName} {data.user.lName}</h6>
+          <h6>{data.user.fName || " "} {data.user.lName || " "}</h6>
           <strong>{data.review}</strong>
           <br />
           <strong>
@@ -254,6 +253,7 @@ export default function Book() {
                 size="large"
                 required
                 value={strValue}
+
                 precision={0.5}
                 getLabelText={getLabelText}
                 onChange={(event, newValue) => {

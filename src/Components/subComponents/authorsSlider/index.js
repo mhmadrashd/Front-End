@@ -45,7 +45,7 @@ const AuthorsSlider = () => {
     fontClr = "dark";
     btnColor = "success";
   }
-  const [CategoryData, setCategoryData] = useState([]);
+  const [AuthorsData, setAuthorsData] = useState([]);
   const refresh = 0;
   useLayoutEffect(() => {
     axios.get(`${URL}/author/`, {
@@ -54,7 +54,9 @@ const AuthorsSlider = () => {
       }
     })
       .then((response) => {
-        setCategoryData(...CategoryData, response.data);
+        setAuthorsData(...AuthorsData, response.data);
+        sessionStorage.setItem("AuthorsData", JSON.stringify(response.data))
+        // console.log(response.data)
       })
       .catch((error) => {
         console.log(error)
@@ -67,7 +69,7 @@ const AuthorsSlider = () => {
         className="p-8"
         showDots={true}
         transitionDuration={50}>
-        {CategoryData.map((currItem, index) => (
+        {AuthorsData.map((currItem, index) => (
           <Card key={index}
             sx={{ maxWidth: 345 }}
             data-aos="fade-down-left"

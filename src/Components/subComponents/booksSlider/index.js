@@ -27,6 +27,7 @@ const BooksSlider = () => {
     })
       .then((response) => {
         setBooksData(...BooksData, response.data);
+        sessionStorage.setItem("BooksData", JSON.stringify(response.data))
         // console.log(response.data)
       })
       .catch((error) => {
@@ -35,7 +36,7 @@ const BooksSlider = () => {
   }, [refresh])
 
   return (
-    <div className={`${styles.container} Books`} >
+    <div className={`${styles.container} Books topPage`} >
       <div className={styles.arrowLeft} onClick={() => handleClick("left")}>
         <ArrowLeftOutlined />
       </div>

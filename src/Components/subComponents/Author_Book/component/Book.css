@@ -12,14 +12,14 @@
     float:left;
     width: 65%;
     color:rgb(0, 0, 0);
-    margin-left:30px;
+    margin-left:20px;
     text-align: left;
 }
 .cardAndrateAndselect{
     float:left; 
     margin-bottom: 15px;
     width: 350px;
-    margin-left: 40px;
+    margin-left: 10px;
 }
 .description{
     
@@ -83,7 +83,6 @@ h5{
 }
 
 .booksofauthor{
-    
     margin:10px;
 }
 .mainbtn{
@@ -134,13 +133,20 @@ font-size: 30px;
 .ratingg{
     clear:both;
     /* position: relative;*/
-    margin-left: 40px; 
+    margin-left: 20px; 
     background-color: #fff;
     border-radius: 20px;
     width: 450px;
     height: 250px;
     padding: 20px 0px;
+    overflow: hidden;
 }
+/* Small Screens */
+@media (max-width:480px) {
+    .ratingg {
+      width: 350px;
+    }
+  }
 ::-webkit-scrollbar {
     width: 2px;
   }

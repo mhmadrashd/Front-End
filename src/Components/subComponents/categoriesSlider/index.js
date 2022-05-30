@@ -62,6 +62,8 @@ const CategoriesSlider = () => {
     })
       .then((response) => {
         setCategoryData(...CategoryData, response.data);
+        sessionStorage.setItem("CategoriesData", JSON.stringify(response.data))
+        // console.log(response.data)
       })
       .catch((error) => {
         console.log(error)

@@ -6,6 +6,7 @@ export const DataSlice = createSlice({
     mode: sessionStorage.getItem('mode') || "light",
     userData: {},
     openDialog: false,
+    openSearchDialog: false,
     loginState: sessionStorage.getItem("loginState") || false,
     refreshAdmin: 0,
   },
@@ -22,6 +23,9 @@ export const DataSlice = createSlice({
     setOpenDialog: (state, action) => {
       state.openDialog = action.payload;
     },
+    setOpenSearchDialog: (state, action) => {
+      state.openSearchDialog = action.payload;
+    },
     setloginState: (state, action) => {
       state.loginState = action.payload;
     },
@@ -30,5 +34,5 @@ export const DataSlice = createSlice({
     },
   },
 });
-export const { changeMood, setUserData, setOpenDialog, setloginState, setRefreshAdmin } = DataSlice.actions;
+export const { changeMood, setUserData, setOpenDialog, setloginState, setRefreshAdmin, setOpenSearchDialog } = DataSlice.actions;
 export default DataSlice.reducer;

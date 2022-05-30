@@ -83,9 +83,9 @@
         .right {
             flex: 1;
             padding: 20px;
-            @media screen and (max-width:380px) {
-                background-color: #fff8f8;
-            }
+            // @media screen and (max-width:380px) {
+            //     background-color: #fff8f8;
+            // }
             .ContactItem {
                 margin-bottom: 20px;
                 display: flex;

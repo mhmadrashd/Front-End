@@ -14,7 +14,7 @@ import AuthorPage from "./Components/subComponents/Author_Book/Author";
 import BookPage from "./Components/subComponents/Author_Book/Book";
 
 
-import { PrivateRoute, PrivateRoute2 } from "./assets/handleErrors";
+import { PrivateRoute } from "./assets/handleErrors";
 import AccSettings from "./Components/UserForms/AccSettings";
 import { useSelector } from "react-redux";
 
@@ -25,8 +25,9 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/front-end" element={<Home />} />
-                <Route path="/" element={<PrivateRoute2><Home /></PrivateRoute2>} />
+                {/*<Route path="/" element={<PrivateRoute2><Home /></PrivateRoute2>} />*/}
                 <Route path="/admin/dashboard" element={<PrivateRoute><ThreeTabs /></PrivateRoute>} />
                 <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                 <Route path="/book/:id" element={<PrivateRoute><BookPage /></PrivateRoute>} />
