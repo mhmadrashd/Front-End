@@ -10,6 +10,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../firbase/firebase";
 import { v4 } from "uuid";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setRefreshAdmin } from '../../../../Redux/DataSlice';
 const URLServer = "https://goodread-backend.herokuapp.com";
 
 function AddBookModal(probs) {
@@ -27,7 +29,7 @@ function AddBookModal(probs) {
     description: '',
     img: ''
   }
-
+  const dispatch = useDispatch();
   // to handle the submit action with formik
   const onSubmit = values => {
     if (imageUpload == null) return;
@@ -48,6 +50,7 @@ function AddBookModal(probs) {
             }
           }).then((response) => {
             probs.onClick();
+            dispatch(setRefreshAdmin(1));
           }).catch((error) => {
             console.log(error);
           })
@@ -85,7 +88,7 @@ function AddBookModal(probs) {
 
   return (
     <div>
-      <Modal show={probs.state} onHide={probs.onClick} size="lg" >
+      <Modal show={probs.state} onHide={probs.close} size="lg" >
         <Modal.Header className="px-4" closeButton>
           <Modal.Title className="ms-auto">Add Book</Modal.Title>
         </Modal.Header>

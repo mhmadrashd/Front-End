@@ -53,15 +53,15 @@ export default function Author() {
       )
   }, [])
 
-  var list = AuthorBook.Books.map((data) => {
+  var list = AuthorBook.Books.map((data, index) => {
 
     return (
-      <div class="booksofauthor">
-        <img alt="" class=" bookimg" src={data.img} width="100px" height="100px" />
-        <div class="selectandrating">
+      <div className="booksofauthor" key={index}>
+        <img alt="" className=" bookimg" src={data.img} width="100px" height="100px" />
+        <div className="selectandrating">
           <div><StarRating stars={data.rating} /></div>
         </div>
-        <div class="rating">
+        <div className="rating">
           <h6>{data.title}</h6>
           <h6>{data.category.Name}</h6>
           <br></br>
@@ -86,27 +86,27 @@ export default function Author() {
     }}>
       <div className='parentContainer' >
         <div>
-          <div class="cardAndrateAndselect">
+          <div className="cardAndrateAndselect">
             <Card bookname={AuthorInfo.fname + AuthorInfo.lname} photo={AuthorInfo.image} />
           </div>
-          <div class="beside">
-            {/* <h3 class="bookname"> {AuthorInfo.bookName}</h3> */}
-            <h6 class="authorname"> {AuthorInfo.fname}  {AuthorInfo.lname}</h6>
-            <h6 class="category"> {!isNaN(Date.parse(AuthorInfo.dob))
+          <div className="beside">
+            {/* <h3 className="bookname"> {AuthorInfo.bookName}</h3> */}
+            <h6 className="authorname"> {AuthorInfo.fname}  {AuthorInfo.lname}</h6>
+            <h6 className="category"> {!isNaN(Date.parse(AuthorInfo.dob))
               && !(Number.isInteger(AuthorInfo.dob)) ?
               new Date(AuthorInfo.dob).toDateString()
               : AuthorInfo.dob} </h6>
-            <div class="rating">
+            <div className="rating">
             </div>
-            <div class="description">
+            <div className="description">
               <p>
                 {AuthorInfo.info}
               </p>
             </div>
           </div>
         </div>
-        <div class="authorbooks">
-          <h5 class="s">Author's Books</h5>
+        <div className="authorbooks">
+          <h5 className="s">Author's Books</h5>
           <>{list}</>
         </div>
       </div>

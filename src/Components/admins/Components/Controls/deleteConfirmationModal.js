@@ -2,10 +2,13 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setRefreshAdmin } from '../../../../Redux/DataSlice';
 const URLServer = "https://goodread-backend.herokuapp.com";
 
 function DeleteModal(probs) {
     const currentTable = probs.table;
+    const dispatch = useDispatch();
     const confirmDeletion = (e) => {
         // console.log(e);
         if (currentTable === "first") {
@@ -17,6 +20,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
+                    dispatch(setRefreshAdmin(1))
                     // window.location.reload();
                 })
                 .catch(function (error) {
@@ -32,6 +36,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
+                    dispatch(setRefreshAdmin(1))
                     // window.location.reload();
                 })
                 .catch(function (error) {
@@ -47,6 +52,7 @@ function DeleteModal(probs) {
             })
                 .then(function (response) {
                     probs.onClick()
+                    dispatch(setRefreshAdmin(1))
                     // window.location.reload();
                 })
                 .catch(function (error) {

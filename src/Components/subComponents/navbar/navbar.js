@@ -130,14 +130,14 @@ const Navbar = () => {
     setOpen(false);
     page = page.toLowerCase();
     if (page === 'profile') {
-      navigate(`/${page}/${localStorage.getItem("id")}`);
+      navigate(`/${page}/${sessionStorage.getItem("id")}`);
     } else if (page === 'logout') {
       dispatch(setloginState(false));
       sessionStorage.clear()
       dispatch(setUserData({}));
       document.cookie = "Authorization=;Max-Age=0;secure"
-      localStorage.removeItem("img");
-      localStorage.removeItem("id");
+      sessionStorage.removeItem("img");
+      sessionStorage.removeItem("id");
       navigate("/");
     }
     else {
@@ -244,7 +244,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User" src={localStorage.getItem("img") || ""} />
+                <Avatar alt="User" src={sessionStorage.getItem("img") || ""} />
               </IconButton>
             </Tooltip>
             <Menu

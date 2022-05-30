@@ -85,7 +85,7 @@ export default function StickyHeadTable(props) {
     };
     const refresh = 0;
     useLayoutEffect(() => {
-        axios.get(URL + localStorage.getItem("id"), {
+        axios.get(URL + sessionStorage.getItem("id"), {
             headers: {
                 token: sessionStorage.getItem("Authorization")
             }

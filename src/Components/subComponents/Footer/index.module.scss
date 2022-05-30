@@ -105,11 +105,20 @@
         justify-content: center;
         flex-wrap: wrap;
         row-gap: 15px;
-        padding: 15px 15px 100px 15px;
+        padding: 15px 15px 50px 15px;
         border-top: 1px solid #eee ;
         max-width: 1240px;
         width: 100%;
         margin: auto;
+        @media screen and (max-width: 992px) {
+            padding: 15px 15px 60px 15px;
+        }
+        @media screen and (max-width: 768px) {
+            padding: 15px 15px 60px 15px;
+        }
+        @media screen and (max-width:480px){
+            padding: 15px 15px 100px 15px;
+        }
         a {
             color: green;
             font-weight: bold;

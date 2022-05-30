@@ -117,7 +117,7 @@ export default function AccountSettings() {
                 onSubmit={handleSubmit}
             >
                 <div className={styles.divAvtar}>
-                    <Avatar className={styles.avtar} src={imageUrl} alt="User Image" />
+                    <img className={styles.avtar} src={imageUrl || ""} alt="User Images" />
                 </div>
                 <div>
                     <TextField
@@ -186,7 +186,7 @@ export default function AccountSettings() {
                 </div>
                 {openDialog && updateState === 1 ?
                     <MsgDialogs title="Update Data" msg={"Data Updated Successfully"} state={1} />
-                    : openDialog && updateState === 0 ? <MsgDialogs title="Update Data" msg={"Data Not Invalid"} state={2} /> : ""}
+                    : openDialog && updateState === 0 ? <MsgDialogs title="Update Data" msg={"Data Invalid"} state={2} /> : ""}
             </Box>
         </div >
     );
