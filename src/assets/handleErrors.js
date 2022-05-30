@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenDialog, setOpenSearchDialog } from '../Redux/DataSlice';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import SearchBar from '../Components/subComponents/search/SearchBar';
@@ -65,10 +66,14 @@ export default function MsgDialogs(props) {
     //{props.msg}
     const [open, setOpen] = React.useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleClose = () => {
         setOpen(false);
         dispatch(setOpenDialog(false));
+        return props.navigation === 1 ?
+            navigate("/") :
+            "";
     };
     return (
 
@@ -96,6 +101,7 @@ export default function MsgDialogs(props) {
         </BootstrapDialog>
     );
 }
+
 export function SearchDialog() {
     const [value, setValue] = React.useState('Books');
     /*
@@ -165,8 +171,13 @@ export const PrivateRoute = ({ children }) => {
     // dispatch(setloginState(true));
     const { loginState } = useSelector((state) => state.DataReducer);
     // console.log(loginState)
-    return loginState ? children : <Navigate to="/" />;
+    return loginState ?
+        children :
+        <>
+            <MsgDialogs title="Open Page" msg={"You Can't open this page before login!"} state={2} navigation={1} />
+        </>;
 }
+
 export const PrivateRoute2 = ({ children }) => {
     return <Navigate to="/front-end" />;
 }
